@@ -41,4 +41,9 @@ class AuthController extends Controller
             'jwt' => $token
         ], Response::HTTP_OK);
     }
+
+    public function user(Request $request)
+    {
+        return $request->user();
+    }
 }

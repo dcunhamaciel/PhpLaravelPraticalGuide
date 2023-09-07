@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::with('role')->paginate();
+        return UserResource::collection(User::paginate());
     }
 
     /**
@@ -34,11 +35,12 @@ class UserController extends Controller
                 'first_name',
                 'last_name',
                 'email',
+                'role_id',
             ) +
             ['password' => Hash::make(1234)]
         );
 
-        return response($user, Response::HTTP_CREATED);
+        return response(new UserResource($user), Response::HTTP_CREATED);
     }
 
     /**
@@ -49,7 +51,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::with('role')->findOrFail($id);
+        return new UserResource(User::findOrFail($id));
     }
 
     /**
@@ -68,10 +70,11 @@ class UserController extends Controller
                 'first_name',
                 'last_name',
                 'email',
+                'role_id',
             )
         );
 
-        return response($user, Response::HTTP_ACCEPTED);
+        return response(new UserResource($user), Response::HTTP_ACCEPTED);
     }
 
     /**

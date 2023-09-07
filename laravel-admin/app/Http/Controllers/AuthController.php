@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -41,6 +41,15 @@ class AuthController extends Controller
         
         return response([
             'jwt' => $token
+        ], Response::HTTP_OK)->withCookie($cookie);
+    }
+
+    public function logout()
+    {
+        $cookie = Cookie::forget('jwt');
+
+        return response([
+            'message' => 'logout success'
         ], Response::HTTP_OK)->withCookie($cookie);
     }
 

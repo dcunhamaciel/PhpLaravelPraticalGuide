@@ -5,24 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Role;
+use App\Http\Resources\RoleResource;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        return Role::all();
+        return RoleResource::collection(Role::all());
     }
 
     public function store(Request $request)
     {
         $role = Role::create($request->only('name'));
         
-        return response($role, Response::HTTP_CREATED);
+        return response(new RoleResource($role), Response::HTTP_CREATED);
     }
 
     public function show($id)
     {
-        return Role::findOrFail($id);
+        return new RoleResource(Role::findOrFail($id));
     }
 
     public function update(Request $request, $id)
@@ -31,7 +32,7 @@ class RoleController extends Controller
 
         $role->update($request->only('name'));
 
-        return response($role, Response::HTTP_ACCEPTED);
+        return response(new RoleResource($role), Response::HTTP_ACCEPTED);
     }
 
     public function destroy($id)

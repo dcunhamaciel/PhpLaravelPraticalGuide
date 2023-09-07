@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::paginate());
+        return UserResource::collection(User::with('role')->paginate());
     }
 
     /**
@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return new UserResource(User::findOrFail($id));
+        return new UserResource(User::with('role')->findOrFail($id));
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
     }
 
     /**
@@ -24,7 +27,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create(
+            $request->only(
+                'first_name',
+                'last_name',
+                'email',
+            ) +
+            ['password' => Hash::make(1234)]
+        );
+
+        return response($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -35,7 +47,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::findOrFail($id);
     }
 
     /**
@@ -47,7 +59,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->update(
+            $request->only(
+                'first_name',
+                'last_name',
+                'email',
+            )
+        );
+
+        return response($user, Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -58,6 +80,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->delete($user);
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

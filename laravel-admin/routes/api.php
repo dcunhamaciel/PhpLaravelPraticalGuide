@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);    
     Route::get('permissions', [PermissionController::class, 'index']);    
     Route::post('upload', [ImageUploadController::class, 'upload']);
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::apiResource('orders', OrderController::class)->only('index', 'show');
 });

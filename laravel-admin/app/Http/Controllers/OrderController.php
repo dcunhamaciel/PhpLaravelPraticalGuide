@@ -10,14 +10,14 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('orderItem')->paginate();
+        $orders = Order::with('orderItems')->paginate();
 
         return OrderResource::collection($orders);
     }
 
     public function show($id)
     {
-        $order = Order::with('orderItem')->findOrFail($id);
+        $order = Order::with('orderItems')->findOrFail($id);
 
         return new OrderResource($order);
     }

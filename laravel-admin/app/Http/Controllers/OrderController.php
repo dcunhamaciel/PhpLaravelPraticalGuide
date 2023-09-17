@@ -65,4 +65,15 @@ class OrderController extends Controller
 
         return response()->stream($callback, Response::HTTP_OK, $headers);
     }
+
+    public function chart()
+    {
+        $orders = Order::query()
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->selectRaw('cast(orders.created_at as date) as date, sum(order_items.price * order_items.quantity) as total')
+            ->groupBy('date')
+            ->get();
+
+        return response($orders, Response::HTTP_OK);
+    }
 }

@@ -43,4 +43,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('orders', [OrderController::class, 'index']);
     Route::apiResource('orders', OrderController::class)->only('index', 'show');
     Route::get('export', [OrderController::class, 'export']);
+    Route::get('chart', [OrderController::class, 'chart']);
 });

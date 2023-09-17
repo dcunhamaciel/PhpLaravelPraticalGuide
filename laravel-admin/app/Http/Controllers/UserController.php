@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
 use App\Http\Requests\UserCreateRequest;
@@ -19,6 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', 'users');
+
         return UserResource::collection(User::with('role')->paginate());
     }
 
@@ -30,6 +32,8 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
+        Gate::authorize('edit', 'users');
+
         $user = User::create(
             $request->only(
                 'first_name',
@@ -51,6 +55,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('view', 'users');
+
         return new UserResource(User::with('role')->findOrFail($id));
     }
 
@@ -63,6 +69,8 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, $id)
     {
+        Gate::authorize('edit', 'users');
+
         $user = User::findOrFail($id);
 
         $user->update(
@@ -85,6 +93,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('edit', 'users');
+
         $user = User::findOrFail($id);
 
         $user->delete($user);

@@ -1,20 +1,46 @@
 <template>
-    <form class="form-signin">
+    <form @submit.prevent="submit" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>        
-        <input type="text" class="form-control" placeholder="First Name" required autofocus>
-        <input type="text" class="form-control" placeholder="Last Name" required>
-        <input type="email" class="form-control" placeholder="Email address" required>        
-        <input type="password" class="form-control" placeholder="Password" required>
-        <input type="password" class="form-control" placeholder="Password Confirm" required>
+        <input v-model="firstName" type="text" class="form-control" placeholder="First Name" required autofocus>
+        <input v-model="lastName" type="text" class="form-control" placeholder="Last Name" required>
+        <input v-model="email" type="email" class="form-control" placeholder="Email address" required>        
+        <input v-model="password" type="password" class="form-control" placeholder="Password" required>
+        <input v-model="passwordConfirm" type="password" class="form-control" placeholder="Password Confirm" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue';
 
 export default {
-    name: 'RegisterComponent'
+    name: 'RegisterComponent',
+    setup() {
+        const firstName = ref('')
+        const lastName = ref('')
+        const email = ref('')
+        const password = ref('')
+        const passwordConfirm = ref('')
+
+        const submit = () => {
+            console.log({
+                first_name: firstName.value,
+                last_name: lastName.value,
+                email: email.value,                
+                password: password.value,
+                password_confirm: passwordConfirm.value
+            })
+        }
+
+        return {
+            firstName,
+            lastName,
+            email,
+            password,
+            passwordConfirm,
+            submit
+        }
+    }
 }
 </script>
 

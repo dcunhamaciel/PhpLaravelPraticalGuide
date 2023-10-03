@@ -9,6 +9,8 @@
 
 <script>
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 export default {
     name: 'LoginComponent',
@@ -18,11 +20,15 @@ export default {
             password: ''
         })
 
+        const router = useRouter()
+
         const submit = async () => {
-            console.log({
+            await axios.post('login', {
                 email: form.email,
                 password: form.password
             })
+
+            await router.push('/')
         }
 
         return { 

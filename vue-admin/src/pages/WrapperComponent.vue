@@ -15,11 +15,20 @@
 <script>
 import NavComponent from '../components/NavComponent.vue';
 import MenuComponent from '../components/MenuComponent.vue';
+import { onMounted } from 'vue';
+import axios from 'axios';
 
 export default {
+    name: 'WrapperComponent',
     components: {
         NavComponent, 
         MenuComponent
+    },
+    setup() {
+        onMounted(async () => {
+            const data = await axios.get('user')
+            console.log(data)
+        })
     }
 }
 </script>

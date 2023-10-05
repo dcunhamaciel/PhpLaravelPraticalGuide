@@ -4,7 +4,7 @@
 
         <nav class="my-2 my-md-0 mr-md-3">
             <router-link to="/profile" class="p-2 text-white text-decoration-none" href="#">{{ name }}</router-link>
-            <a class="p-2 text-white text-decoration-none" href="#">Sign out</a>
+            <router-link to="/login" class="p-2 text-white text-decoration-none" @click="logout">Sign out</router-link>
         </nav>
     </nav>
 </template>
@@ -20,13 +20,25 @@ export default {
         const name = ref('')
 
         onMounted(async () => {
-            const { data } = await axios.get('user')
+            name.value = ''
 
-            name.value = data.first_name + ' ' + data.last_name
+            try {
+                const { data } = await axios.get('user')
+
+                name.value = data.first_name + ' ' + data.last_name
+
+            } catch (error) {                
+                console.log(error)
+            }            
         })
 
+        const logout = async () => {
+            await axios.post('logout')
+        }
+
         return {
-            name
+            name,
+            logout
         }
     }
 }

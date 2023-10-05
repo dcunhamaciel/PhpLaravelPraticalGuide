@@ -16,6 +16,7 @@
 import NavComponent from '../components/NavComponent.vue';
 import MenuComponent from '../components/MenuComponent.vue';
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 export default {
@@ -25,9 +26,14 @@ export default {
         MenuComponent
     },
     setup() {
+        const router = useRouter();        
+
         onMounted(async () => {
-            const data = await axios.get('user')
-            console.log(data)
+            try {
+                const { data } = await axios.get('user')
+            } catch (e) {
+                await router.push('/login')
+            }
         })
     }
 }

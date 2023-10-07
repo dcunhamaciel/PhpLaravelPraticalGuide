@@ -16,7 +16,11 @@
                 <td>{{ user.first_name }} {{ user.last_name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role.name }}</td>
-                <td></td>
+                <td>
+                    <div class="btn-group mr-2">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary" @click="deleteUser(user.id)">Delete</a>
+                    </div>
+                </td>
             </tr>
         </tbody>
         </table>
@@ -34,9 +38,10 @@
     </nav>
 </template>
 
-<script>
+<script lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import axios from 'axios';
+import { User } from '../../models/user';
 
 export default {
     name: 'UsersComponent',
@@ -45,16 +50,24 @@ export default {
         const page = ref(1)
         const lastPage = ref(1)
 
-        const load = async () => {
+        const loadUsers = async () => {
             const { data } = await axios.get(`users?page=${page.value}`)
 
             users.value = data.data
             lastPage.value = data.meta.last_page
         }
 
-        onMounted(load)
+        const deleteUser = async (id: number) => {
+            if (confirm('Are you sure?')) {
+                await axios.delete(`users/${id}`)
 
-        watch(page, load)
+                users.value = users.value.filter((user: User) => user.id !== id)
+            }
+        }
+
+        onMounted(loadUsers)
+
+        watch(page, loadUsers)
 
         const prev = () => {
             if (page.value > 1) {
@@ -70,6 +83,7 @@ export default {
 
         return {
             users,
+            deleteUser,
             prev,
             next
         }

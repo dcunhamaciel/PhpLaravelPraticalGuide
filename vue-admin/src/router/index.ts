@@ -5,6 +5,7 @@ import WrapperComponent from '../pages/WrapperComponent.vue'
 import DashboardComponent from '../pages/DashboardComponent.vue'
 import UsersComponent from '../pages/users/UsersComponent.vue'
 import UserCreateComponent from '../pages/users/UserCreateComponent.vue'
+import UserEditComponent from '../pages/users/UserEditComponent.vue'
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/register', component: RegisterComponent },
@@ -16,6 +17,7 @@ const routes: Array<RouteRecordRaw> = [
             { path: '', component: DashboardComponent },
             { path: '/users', component: UsersComponent },
             { path: '/users/create', component: UserCreateComponent },
+            { path: '/users/:id/edit', component: UserEditComponent },
         ] 
     },
 ]

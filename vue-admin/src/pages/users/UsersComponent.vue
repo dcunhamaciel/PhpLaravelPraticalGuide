@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import axios from 'axios';
 
 export default {
@@ -54,19 +54,17 @@ export default {
 
         onMounted(load)
 
-        const prev = async () => {
+        watch(page, load)
+
+        const prev = () => {
             if (page.value > 1) {
                 page.value--
-
-                await load()
             }
         }
 
-        const next = async () => {
+        const next = () => {
             if (page.value < lastPage.value) {
                 page.value++
-
-                await load()
             }
         }
 

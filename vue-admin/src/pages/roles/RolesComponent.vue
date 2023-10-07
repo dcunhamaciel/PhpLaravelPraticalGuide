@@ -17,6 +17,7 @@
                 <td>{{ role.name }}</td>
                 <td>
                     <div class="btn-group mr-2">
+                        <router-link :to="`/roles/${role.id}/edit`" class="btn btn-sm btn-outline-secondary">Edit</router-link>
                         <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary" @click="deleteRole(role.id)">Delete</a>
                     </div>
                 </td>

@@ -7,6 +7,7 @@ import UsersComponent from '../pages/users/UsersComponent.vue'
 import UserCreateComponent from '../pages/users/UserCreateComponent.vue'
 import UserEditComponent from '../pages/users/UserEditComponent.vue'
 import RolesComponent from '../pages/roles/RolesComponent.vue'
+import RoleCreateComponent from '../pages/roles/RoleCreateComponent.vue'
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/register', component: RegisterComponent },
@@ -20,6 +21,7 @@ const routes: Array<RouteRecordRaw> = [
             { path: '/users/create', component: UserCreateComponent },
             { path: '/users/:id/edit', component: UserEditComponent },
             { path: '/roles', component: RolesComponent },
+            { path: '/roles/create', component: RoleCreateComponent },
         ] 
     },
 ]

@@ -13,13 +13,18 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="users" active-class="active" class="nav-link d-flex align-items-center gap-2">
+                    <router-link to="/users" active-class="active" class="nav-link d-flex align-items-center gap-2">
                         Users
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="roles" active-class="active" class="nav-link d-flex align-items-center gap-2">
+                    <router-link to="/roles" active-class="active" class="nav-link d-flex align-items-center gap-2">
                         Roles
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link to="/products" active-class="active" class="nav-link d-flex align-items-center gap-2">
+                        Products
                     </router-link>
                 </li>
             </ul>

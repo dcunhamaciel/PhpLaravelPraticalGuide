@@ -29,32 +29,24 @@
         </table>
     </div>
 
-    <nav>
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" @click="prev">Previous</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" @click="next">Next</a>
-            </li>
-        </ul>
-    </nav>
+    <PaginatorComponent :lastPage="lastPage" @page-changed="loadProducts($event)"/>
 </template>
 
 <script lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import axios from 'axios';
 import { Product } from '../../models/product';
+import PaginatorComponent from '../../components/PaginatorComponent.vue';
 
 export default {
     name: 'ProductsComponent',
+    components: { PaginatorComponent },
     setup() {
         const products = ref([])
-        const page = ref(1)
         const lastPage = ref(1)
 
-        const loadProducts = async () => {
-            const { data } = await axios.get(`products?page=${page.value}`)
+        const loadProducts = async (page = 1) => {
+            const { data } = await axios.get(`products?page=${page}`)
 
             products.value = data.data
             lastPage.value = data.meta.last_page            
@@ -70,25 +62,11 @@ export default {
 
         onMounted(loadProducts)
 
-        watch(page, loadProducts)
-
-        const prev = () => {
-            if (page.value > 1) {
-                page.value--
-            }
-        }
-
-        const next = () => {
-            if (page.value < lastPage.value) {
-                page.value++
-            }
-        }
-
         return {
             products,
-            deleteProduct,
-            prev,
-            next
+            lastPage,
+            loadProducts,
+            deleteProduct
         }
     }
 }

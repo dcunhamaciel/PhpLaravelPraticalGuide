@@ -1,6 +1,6 @@
 <template>
     <div class="pt-3 pb-2 mb-3 border-bottom">
-        <router-link to="/orders/create" class="btn btn-sm btn-outline-secondary">Add</router-link>
+        <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary" @click="exportCSV">Export</a>
     </div>
     <div class="table-responsive small">
         <table class="table table-sm">
@@ -84,12 +84,24 @@ export default {
             selected.value = selected.value !== id ? id : 0
         }
 
+        const exportCSV = async () => {
+            const { data } = await axios.get('export', {})
+
+            const blob = new Blob([data], { type: 'text/csv'})
+            
+            const link = document.createElement('a')
+            link.href = window.URL.createObjectURL(blob)
+            link.download = 'orders.csv'
+            link.click()
+        }
+
         return {
             orders,
             selected,
             lastPage,
             loadOrders,                    
-            select
+            select,
+            exportCSV
         }
     }    
 }

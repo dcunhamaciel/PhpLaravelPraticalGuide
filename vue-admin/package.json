@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/c3": "^0.7.10",
     "axios": "^1.5.0",
+    "c3": "^0.7.20",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",

@@ -10,26 +10,20 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
-import { onMounted } from 'vue';
+import { ref, computed, watch } from 'vue';
+import { useStore } from 'vuex';
 import axios from 'axios';
 
 export default {
     name: 'NavComponent',
     setup() {
         const name = ref('')
+        const store = useStore()
 
-        onMounted(async () => {
-            name.value = ''
+        const user = computed(() => store.state.user)
 
-            try {
-                const { data } = await axios.get('user')
-
-                name.value = data.first_name + ' ' + data.last_name
-
-            } catch (error) {                
-                console.log(error)
-            }            
+        watch(user, () => {
+            name.value = user.value.first_name + ' ' + user.value.last_name
         })
 
         const logout = async () => {

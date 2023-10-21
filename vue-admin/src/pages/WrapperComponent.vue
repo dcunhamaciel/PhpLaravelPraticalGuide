@@ -17,6 +17,7 @@ import NavComponent from '../components/NavComponent.vue';
 import MenuComponent from '../components/MenuComponent.vue';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import axios from 'axios';
 
 export default {
@@ -26,11 +27,14 @@ export default {
         MenuComponent
     },
     setup() {
-        const router = useRouter();        
+        const router = useRouter()
+        const store = useStore()
 
         onMounted(async () => {
             try {
                 const { data } = await axios.get('user')
+
+                await store.dispatch('setUser', data)
             } catch (e) {
                 await router.push('/login')
             }

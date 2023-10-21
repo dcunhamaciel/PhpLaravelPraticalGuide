@@ -12,6 +12,7 @@ import RoleEditComponent from '../pages/roles/RoleEditComponent.vue'
 import ProductsComponent from '../pages/products/ProductsComponent.vue'
 import ProductCreateComponent from '../pages/products/ProductCreateComponent.vue'
 import ProductEditComponent from '../pages/products/ProductEditComponent.vue'
+import OrdersComponent from '../pages/orders/OrdersComponent.vue'
 
 const routes: Array<RouteRecordRaw> = [
     { path: '/register', component: RegisterComponent },
@@ -30,6 +31,7 @@ const routes: Array<RouteRecordRaw> = [
             { path: '/products', component: ProductsComponent },
             { path: '/products/create', component: ProductCreateComponent },
             { path: '/products/:id/edit', component: ProductEditComponent },
+            { path: '/orders', component: OrdersComponent },
         ] 
     },
 ]

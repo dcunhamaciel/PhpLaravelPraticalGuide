@@ -27,6 +27,11 @@
                         Products
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link to="/orders" active-class="active" class="nav-link d-flex align-items-center gap-2">
+                        Orders
+                    </router-link>
+                </li>
             </ul>
         </div>
     </div>

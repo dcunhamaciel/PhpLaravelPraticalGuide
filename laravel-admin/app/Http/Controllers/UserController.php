@@ -17,6 +17,14 @@ class UserController extends Controller
      *     security={{"bearerAuth":{}}},
      *     @OA\Response(response="200",
      *         description="User Collection" 
+     *     ),
+     *     @OA\Parameter(
+     *         name="page",
+     *         description="Pagination page",
+     *         in="query",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
      *     )
      * )
      */
@@ -28,10 +36,21 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Get(path="/users/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="200",
+     *         description="User" 
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="User ID",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
      */
     public function store(UserCreateRequest $request)
     {

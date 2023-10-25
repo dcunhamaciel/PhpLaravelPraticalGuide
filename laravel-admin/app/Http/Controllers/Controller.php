@@ -21,6 +21,12 @@ use Illuminate\Routing\Controller as BaseController;
  *     url=L5_SWAGGER_CONST_HOST,
  *     description="Admin API Server"
  * )
+ * 
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer"
+ * )
  */
 
 class Controller extends BaseController

@@ -15,6 +15,7 @@ class UserController extends Controller
     /**
      * @OA\Get(path="/users",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     @OA\Response(response="200",
      *         description="User Collection" 
      *     ),
@@ -38,6 +39,7 @@ class UserController extends Controller
     /**
      * @OA\Post(path="/users",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     @OA\Response(response="201",
      *         description="User Create" 
      *     ),
@@ -67,6 +69,7 @@ class UserController extends Controller
     /**
      * @OA\Get(path="/users/{id}",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     @OA\Response(response="202",
      *         description="User Update" 
      *     ),
@@ -91,6 +94,7 @@ class UserController extends Controller
     /**
      * @OA\Put(path="/users/{id}",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     @OA\Response(response="201",
      *         description="User" 
      *     ),
@@ -129,6 +133,7 @@ class UserController extends Controller
     /**
      * @OA\Delete(path="/users/{id}",
      *     security={{"bearerAuth":{}}},
+     *     tags={"Users"},
      *     @OA\Response(response="204",
      *         description="User Delete"
      *     ),

@@ -36,19 +36,14 @@ class UserController extends Controller
     }
 
     /**
-     * @OA\Get(path="/users/{id}",
+     * @OA\Post(path="/users",
      *     security={{"bearerAuth":{}}},
-     *     @OA\Response(response="200",
-     *         description="User" 
+     *     @OA\Response(response="201",
+     *         description="User Create" 
      *     ),
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="User ID",
-     *         in="path",
+     *     @OA\RequestBody(
      *         required=true,
-     *         @OA\Schema(
-     *             type="integer"
-     *         )
+     *         @OA\JsonContent(ref="#/components/schemas/UserCreateRequest")
      *     )
      * )
      */
@@ -70,10 +65,21 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Get(path="/users/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="202",
+     *         description="User Update" 
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="User ID",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
      */
     public function show($id)
     {
@@ -83,11 +89,24 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Put(path="/users/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="201",
+     *         description="User" 
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="User ID",
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/UserUpdateRequest")
+     *     )
+     * )
      */
     public function update(UserUpdateRequest $request, $id)
     {
@@ -108,10 +127,21 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(path="/users/{id}",
+     *     security={{"bearerAuth":{}}},
+     *     @OA\Response(response="204",
+     *         description="User Delete"
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="User ID",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     )
+     * )
      */
     public function destroy($id)
     {
